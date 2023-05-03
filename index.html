@@ -1,0 +1,44 @@
+<html>
+<body>
+<script>
+function envoi_serveur() {
+    var Saisie = document.getElementById('saisie').value;
+    var req = new XMLHttpRequest();
+    req.onreadystatechange = function () {
+        if (req.readyState == 4 && req.status == 200) {
+            var response = JSON.parse(req.responseText);
+            var resultDiv = document.getElementById('Result');
+            var resultMessage = response.palindrome + "<br>";
+            resultMessage += response.message;
+            resultDiv.innerHTML = resultMessage;
+            if (response.status === 'success') {
+                resultDiv.style.color = 'green';
+            } else {
+                resultDiv.style.color = 'red';
+            }
+        }
+    };
+    req.open("GET", "traitement.php?nom=" + Saisie, true);
+    req.send(null);
+}
+
+function checkName() {
+    var Saisie = document.getElementById('saisie').value;
+    if (Saisie.length >= 2 && Saisie.length <= 10) {
+        envoi_serveur();
+    } else {
+        var resultDiv = document.getElementById('Result');
+        resultDiv.innerHTML = 'La saisie doit comporter entre 2 et 10 caractères.';
+        resultDiv.style.color = 'red';
+    }
+}
+
+</script>
+
+<h1>Formulaire de recherche</h1>
+<p>Votre nom ? <input id="saisie" onkeyup="checkName()"/></p>
+<p><button onclick="envoi_serveur()">Envoyer</button></p>
+<div id="Result"></div>
+
+</body>
+</html>
