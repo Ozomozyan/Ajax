@@ -12,7 +12,7 @@ $base = new PDO('mysql:host=localhost; dbname=id20172939_ajax', 'id20172939_id20
 $base->exec("SET CHARACTER SET utf8");
 
 // Check if the name exists in the database
-$query = $base->prepare("SELECT * FROM Ajax WHERE name = :name");
+$query = $base->prepare("SELECT * FROM names WHERE name = :name");
 $query->bindParam(':name', $NAME);
 $query->execute();
 
