@@ -2,7 +2,8 @@
 <body>
 <script>
 function envoi_serveur() {
-    var Saisie = document.getElementById('saisie').value;
+    var SaisiePalindrome = document.getElementById('saisiePalindrome').value;
+    var SaisieName = document.getElementById('saisieName').value;
     var req = new XMLHttpRequest();
     req.onreadystatechange = function () {
         if (req.readyState == 4 && req.status == 200) {
@@ -18,25 +19,15 @@ function envoi_serveur() {
             }
         }
     };
-    req.open("GET", "traitement.php?nom=" + Saisie, true);
+    req.open("GET", "traitement.php?name=" + SaisieName + "&word=" + SaisiePalindrome, true);
     req.send(null);
-}
-
-function checkName() {
-    var Saisie = document.getElementById('saisie').value;
-    if (Saisie.length >= 2 && Saisie.length <= 10) {
-        envoi_serveur();
-    } else {
-        var resultDiv = document.getElementById('Result');
-        resultDiv.innerHTML = 'La saisie doit comporter entre 2 et 10 caractères.';
-        resultDiv.style.color = 'red';
-    }
 }
 
 </script>
 
 <h1>Formulaire de recherche</h1>
-<p>Votre nom ? <input id="saisie" onkeyup="checkName()"/></p>
+<p>Entrez un mot pour vérifier s'il est un palindrome : <input id="saisiePalindrome"/></p>
+<p>Entrez un nom pour vérifier s'il est présent dans la BDD : <input id="saisieName"/></p>
 <p><button onclick="envoi_serveur()">Envoyer</button></p>
 <div id="Result"></div>
 
