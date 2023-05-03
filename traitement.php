@@ -1,5 +1,6 @@
 <?php
-$NAME = $_GET['nom'];
+$NAME = $_GET['name'];
+$WORD = $_GET['word'];
 
 function isPalindrome($string) {
     $string = strtolower($string);
@@ -18,10 +19,10 @@ $query->execute();
 
 $result = array();
 
-if (isPalindrome($NAME)) {
-    $result['palindrome'] = 'Le mot '.$NAME.' est un palindrome.';
+if (isPalindrome($WORD)) {
+    $result['palindrome'] = 'Le mot '.$WORD.' est un palindrome.';
 } else {
-    $result['palindrome'] = 'Le mot '.$NAME.' n\'est pas un palindrome.';
+    $result['palindrome'] = 'Le mot '.$WORD.' n\'est pas un palindrome.';
 }
 
 if ($query->rowCount() > 0) {
